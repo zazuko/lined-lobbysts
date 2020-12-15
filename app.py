@@ -6,6 +6,7 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 from api_clients import SparqlClient
 import networkx as nx
+import json
 
 client = SparqlClient()
 query = """
@@ -27,47 +28,45 @@ query = """
 """
 
 df = client.send_query(query)
-parties = set(df["party"])
 
-graph = nx.Graph()
-graph.add_nodes_from(df["politician"])
-graph.add_nodes_from(df["party"])
-graph.add_edges_from(zip(df["politician"], df["party"]))
 
 elements = []
-for node in graph.nodes:
-    if node in parties:
-        group = "party"
-    else:
-        group = "politician"
+for iterator, group in zip([set(df["party"]), df["politician"]], ["party", "politician"]):
+    for node in iterator:
+        item = {
+            "data" : {
+                "id": node,
+                "label": node
+                },
+            "classes": group
+        }
+        elements.append(item)
 
-    item = {
-        "data" : {
-            "id": node,
-            "label": node
-            },
-        "classes": group
-    }
-    elements.append(item)
-
-for edge in graph.edges:
+for source, target in zip(df["party"], df["politician"]):
     item = {
         "data": {
-            "source": edge[0],
-            "target": edge[1]
+            "source": source,
+            "target": target
         }
     }
     elements.append(item)
 
 cyto.load_extra_layouts()
 
-stylesheet = [
+default_stylesheet = [
     {
         'selector': '.party',
         'style': {
             'background-color': 'blue',
-            'label': 'data(label)'}
-    }
+            'label': 'data(label)',
+            'z-index': 9998
+            }
+    },
+    {
+        'selector': '.politician',
+        'style': {
+            'background-color': 'grey'}
+    },
 ]
 app = dash.Dash(__name__)
 
@@ -76,11 +75,33 @@ app.layout = html.Div([
     cyto.Cytoscape(
         id='cytoscape',
         elements=elements,
-        layout={'name': 'cose', 'animate': True}, #klay, cola
+        layout={'name': 'cose', 'animate': False}, #klay, cola
         style={'width': '1800px', 'height': '1000px'},
-        stylesheet=stylesheet
-
     )
 ])
+
+@app.callback(Output('cytoscape', 'stylesheet'),
+              [Input('cytoscape', 'tapNode')])
+def generate_stylesheet(node):
+    if not node:
+        return default_stylesheet
+
+    stylesheet = [
+    {
+        'selector': '.party',
+        'style': {
+            'background-color': 'blue',
+            'label': 'data(label)',
+            'z-index': 9998}
+    },{
+        "selector": 'node[id = "{}"]'.format(node['data']['id']),
+        'style': {
+            'background-color': 'green',
+            'label': 'data(label)',
+            'z-index': 9999}
+    }]
+
+    return stylesheet
+
 
 app.run_server(debug=True)
