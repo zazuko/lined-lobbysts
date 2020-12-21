@@ -329,17 +329,6 @@ test = ["pytest (>=3.6.0)", "pytest-cov", "mock"]
 
 [[package]]
 category = "main"
-description = "An ISO 8601 date/time/duration parser and formatter"
-name = "isodate"
-optional = false
-python-versions = "*"
-version = "0.6.0"
-
-[package.dependencies]
-six = "*"
-
-[[package]]
-category = "main"
 description = "Various helpers to pass data to untrusted environments and back."
 name = "itsdangerous"
 optional = false
@@ -695,6 +684,14 @@ version = "2.7.2"
 
 [[package]]
 category = "main"
+description = "Python interface to Graphviz"
+name = "pygraphviz"
+optional = false
+python-versions = ">=3.6"
+version = "1.6"
+
+[[package]]
+category = "main"
 description = "Python parsing module"
 name = "pyparsing"
 optional = false
@@ -756,25 +753,6 @@ version = "19.0.2"
 
 [[package]]
 category = "main"
-description = "RDFLib is a Python library for working with RDF, a simple yet powerful language for representing information."
-name = "rdflib"
-optional = false
-python-versions = "*"
-version = "5.0.0"
-
-[package.dependencies]
-isodate = "*"
-pyparsing = "*"
-six = "*"
-
-[package.extras]
-docs = ["sphinx (<3)", "sphinxcontrib-apidoc"]
-html = ["html5lib"]
-sparql = ["requests"]
-tests = ["html5lib", "networkx", "nose", "doctest-ignore-unicode"]
-
-[[package]]
-category = "main"
 description = "Python HTTP for Humans."
 name = "requests"
 optional = false
@@ -817,37 +795,6 @@ name = "six"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 version = "1.15.0"
-
-[[package]]
-category = "main"
-description = "A Jupyter kernel for SPARQL queries"
-name = "sparqlkernel"
-optional = false
-python-versions = "*"
-version = "1.3.0"
-
-[package.dependencies]
-SPARQLWrapper = "*"
-ipykernel = ">=4.0"
-notebook = "*"
-pygments = "*"
-rdflib = "*"
-setuptools = "*"
-traitlets = "*"
-
-[[package]]
-category = "main"
-description = "SPARQL Endpoint interface to Python"
-name = "sparqlwrapper"
-optional = false
-python-versions = "*"
-version = "1.8.4"
-
-[package.dependencies]
-rdflib = ">=4.0"
-
-[package.extras]
-keepalive = ["keepalive (>=0.5)"]
 
 [[package]]
 category = "main"
@@ -956,7 +903,7 @@ version = "3.5.1"
 notebook = ">=4.4.1"
 
 [metadata]
-content-hash = "ea40100c5d025a616a0897a0327d7217029cffda2b6434992f71b5fc17f3a507"
+content-hash = "efb9d2805f8fec63e8d7665c31154631a4476c2c4284cd81c616a083bdc738ef"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -1092,10 +1039,6 @@ ipython-genutils = [
 ipywidgets = [
     {file = "ipywidgets-7.5.1-py2.py3-none-any.whl", hash = "sha256:13ffeca438e0c0f91ae583dc22f50379b9d6b28390ac7be8b757140e9a771516"},
     {file = "ipywidgets-7.5.1.tar.gz", hash = "sha256:e945f6e02854a74994c596d9db83444a1850c01648f1574adf144fbbabe05c97"},
-]
-isodate = [
-    {file = "isodate-0.6.0-py2.py3-none-any.whl", hash = "sha256:aa4d33c06640f5352aca96e4b81afd8ab3b47337cc12089822d6f322ac772c81"},
-    {file = "isodate-0.6.0.tar.gz", hash = "sha256:2e364a3d5759479cdb2d37cce6b9376ea504db2ff90252a2e5b7cc89cc9ff2d8"},
 ]
 itsdangerous = [
     {file = "itsdangerous-1.1.0-py2.py3-none-any.whl", hash = "sha256:b12271b2047cb23eeb98c8b5622e2e5c5e9abd9784a153e9d8ef9cb4dd09d749"},
@@ -1368,6 +1311,9 @@ pygments = [
     {file = "Pygments-2.7.2-py3-none-any.whl", hash = "sha256:88a0bbcd659fcb9573703957c6b9cff9fab7295e6e76db54c9d00ae42df32773"},
     {file = "Pygments-2.7.2.tar.gz", hash = "sha256:381985fcc551eb9d37c52088a32914e00517e57f4a21609f48141ba08e193fa0"},
 ]
+pygraphviz = [
+    {file = "pygraphviz-1.6.zip", hash = "sha256:411ae84a5bc313e3e1523a1cace59159f512336318a510573b47f824edef8860"},
+]
 pyparsing = [
     {file = "pyparsing-2.4.7-py2.py3-none-any.whl", hash = "sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b"},
     {file = "pyparsing-2.4.7.tar.gz", hash = "sha256:c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1"},
@@ -1443,10 +1389,6 @@ pyzmq = [
     {file = "pyzmq-19.0.2-pp36-pypy36_pp73-macosx_10_9_x86_64.whl", hash = "sha256:a7e7f930039ee0c4c26e4dfee015f20bd6919cd8b97c9cd7afbde2923a5167b6"},
     {file = "pyzmq-19.0.2.tar.gz", hash = "sha256:296540a065c8c21b26d63e3cea2d1d57902373b16e4256afe46422691903a438"},
 ]
-rdflib = [
-    {file = "rdflib-5.0.0-py3-none-any.whl", hash = "sha256:88208ea971a87886d60ae2b1a4b2cdc263527af0454c422118d43fe64b357877"},
-    {file = "rdflib-5.0.0.tar.gz", hash = "sha256:78149dd49d385efec3b3adfbd61c87afaf1281c30d3fcaf1b323b34f603fb155"},
-]
 requests = [
     {file = "requests-2.24.0-py2.py3-none-any.whl", hash = "sha256:fe75cc94a9443b9246fc7049224f75604b113c36acb93f87b80ed42c44cbb898"},
     {file = "requests-2.24.0.tar.gz", hash = "sha256:b3559a131db72c33ee969480840fff4bb6dd111de7dd27c8ee1f820f4f00231b"},
@@ -1461,16 +1403,6 @@ send2trash = [
 six = [
     {file = "six-1.15.0-py2.py3-none-any.whl", hash = "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"},
     {file = "six-1.15.0.tar.gz", hash = "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259"},
-]
-sparqlkernel = [
-    {file = "sparqlkernel-1.3.0.tar.gz", hash = "sha256:fdaa990dccd7b4d6153876d842f6b78c97786e429a474770bf9695e8ad109b00"},
-]
-sparqlwrapper = [
-    {file = "SPARQLWrapper-1.8.4-py2-none-any.whl", hash = "sha256:14ec551f0d60b4a496ffcc31f15337e844c085b8ead8cbe9a7178748a6de3794"},
-    {file = "SPARQLWrapper-1.8.4-py2.7.egg", hash = "sha256:976bb3197e997714e346adc0f0ffe48f446a45fc07f49fa5cd88168de31f2828"},
-    {file = "SPARQLWrapper-1.8.4-py3-none-any.whl", hash = "sha256:abc3e7eadcad32fa69a85c003853e2f6f73bda6cc999853838f401a5a1ea1109"},
-    {file = "SPARQLWrapper-1.8.4-py3.4.egg", hash = "sha256:786a2276ca48ce4dd0d1c9c271b343bcd7466a44b850fd7e4efd8708ee200a57"},
-    {file = "SPARQLWrapper-1.8.4.tar.gz", hash = "sha256:21928e7a97f565e772cdeeb0abad428960f4307e3a13dbdd8f6d3da8a6a506c9"},
 ]
 spectate = [
     {file = "spectate-0.5.0-py3-none-any.whl", hash = "sha256:2d580ddfed262e666125109ee203851f327ccf8bbec426cb5e8e1f6127c9fab3"},

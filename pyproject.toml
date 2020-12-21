@@ -7,7 +7,6 @@ authors = ["Magdalena Surowka, Zazuko"]
 [tool.poetry.dependencies]
 python = "^3.8"
 pandas = "^1.1.4"
-sparqlkernel = "^1.3.0"
 ipykernel = "^5.3.4"
 plotly = "^4.12.0"
 requests = "^2.24.0"
@@ -17,6 +16,7 @@ ipycytoscape = "^1.0.4"
 matplotlib = "^3.3.3"
 dash = "^1.18.1"
 dash-cytoscape = "^0.2.0"
+pygraphviz = "^1.6" #Prerequisite: sudo apt-get install python3-dev graphviz libgraphviz-dev pkg-config
 
 [tool.poetry.dev-dependencies]
 
